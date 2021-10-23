@@ -4,7 +4,10 @@ export default class TheDocument extends Document {
 	render() {
 		return (
 			<Html lang="en-us">
-				<Head />
+				<Head>
+					<meta name="description" content="DESCRIPTION" />
+					<meta name="author" content="Jed Wang" />
+				</Head>
 				<body>
 					<Main />
 					<NextScript />

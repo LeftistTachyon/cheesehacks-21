@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/dist/shared/lib/router/router";
-import { Head } from "next/document";
 import theme from "@styles/theme";
+import Head from "next/head";
 
 export default function TheApp({
 	Component,
