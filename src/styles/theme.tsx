@@ -4,8 +4,9 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
 	colors: {
 		brand: {
-			secondary: "#171a23",
-			primary: "#5cfff1",
+			primary: "white",
+			secondary: "#2C922D",
+			tertiary: "#2BF055",
 		},
 	},
 	styles: {
@@ -16,11 +17,11 @@ const theme = extendTheme({
 			body: {
 				fontFamily:
 					"-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-				color: "white",
+				color: "black",
 				lineHeight: "base",
 				padding: 0,
 				margin: 0,
-				backgroundColor: "brand.secondary",
+				backgroundColor: "brand.primary",
 			},
 			a: {
 				color: "inherit",
@@ -37,7 +38,7 @@ const theme = extendTheme({
 				background: "transparent",
 			},
 			"&::-webkit-scrollbar-thumb": {
-				background: "brand.primary",
+				background: "brand.secondary",
 				borderRadius: "50px",
 			},
 		}),
