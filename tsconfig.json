@@ -17,14 +17,14 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "src"
-	},
-	"paths": {
-		"@components/*": ["components/*"],
-		"@styles/*": ["styles/*"],
-		"@utils/*": ["utils/*"],
-		"@lib/*": ["lib/*"],
-		"@pages/*": ["pages/*"]
+		"baseUrl": "src",
+		"paths": {
+			"@components/*": ["components/*"],
+			"@styles/*": ["styles/*"],
+			"@utils/*": ["utils/*"],
+			"@lib/*": ["lib/*"],
+			"@pages/*": ["pages/*"]
+		}
 	},
 	"exclude": ["node_modules"],
 	"include": [
