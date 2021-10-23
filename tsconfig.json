@@ -1,26 +1,36 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"allowJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"lib": ["dom", "esnext"],
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "src"
+	},
+	"paths": {
+		"@components/*": ["components/*"],
+		"@styles/*": ["styles/*"],
+		"@utils/*": ["utils/*"],
+		"@lib/*": ["lib/*"],
+		"@pages/*": ["pages/*"]
+	},
+	"exclude": ["node_modules"],
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"src/pages/_document.tsx",
+		"src/pages/_error.js"
+	]
 }
