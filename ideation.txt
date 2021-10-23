@@ -1,3 +1,4 @@
 Pain points:
- - For 
+ - Time management
+   - Mayhaps something that lets you organize your day
 
