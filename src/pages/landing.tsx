@@ -39,7 +39,9 @@ function Landing(): JSX.Element {
 			<Container>
 				<ContainerInside>
 					<Heading>{JSON.stringify(dbDay.day)}</Heading>
-					<TaskCard task={task}>Send it</TaskCard>
+					<TaskCard task={task} onDelete={() => alert("Deleted!")}>
+						Send it
+					</TaskCard>
 				</ContainerInside>
 			</Container>
 		);

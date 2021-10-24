@@ -9,7 +9,6 @@ import {
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
-	NumberInputField,
 	NumberInput,
 	Input,
 } from "@chakra-ui/react";
@@ -25,17 +24,21 @@ import React from "react";
 
 type TaskCardProps = {
 	task: Task;
+	onDelete: () => void;
 	[key: string]: any;
 };
 
 export default function TaskCard(props: TaskCardProps): JSX.Element {
+	if (!props.task.movable)
+		throw new Error("Invalid prop: meeting instead of task");
+
 	const { onOpen, onClose, isOpen } = useDisclosure();
 
 	function validateName(value: string): string {
 		if (!value) return "Name is required";
 	}
 	function validateDuration(hours: number, minutes: number) {
-		if (hours == 0 && minutes == 0)
+		if (hours === 0 && minutes === 0)
 			return "Please enter a duration greater than zero";
 	}
 
@@ -75,7 +78,7 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 						}, 1000);
 					}}
 				>
-					{(props) => (
+					{(innerProps) => (
 						<Form>
 							<FormLabel>Duration</FormLabel>
 							<Flex justify="space-between" alignItems="center">
@@ -84,7 +87,7 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 									validate={(hours) =>
 										validateDuration(
 											hours,
-											props.values.minutes
+											innerProps.values.minutes
 										)
 									}
 								>
@@ -92,15 +95,17 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 										<FormControl
 											id="hours"
 											isInvalid={
-												form.errors.hours &&
-												form.touched.hours
+												(form.errors.hours &&
+													form.touched.hours) ||
+												(form.errors.minutes &&
+													form.touched.minutes)
 											}
-											isRequired
 										>
 											<NumberInput max={24} min={0}>
-												<NumberInputField
+												<Input
+													type="number"
 													{...field}
-													placeholder="00"
+													placeholder="0"
 												/>
 											</NumberInput>
 										</FormControl>
@@ -112,13 +117,16 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 										<FormControl
 											id="minutes"
 											isInvalid={
-												form.errors.minutes &&
-												form.touched.minutes
+												(form.errors.minutes &&
+													form.touched.minutes) ||
+												(form.errors.hours &&
+													form.touched.hours)
 											}
 											isRequired
 										>
 											<NumberInput max={59} min={0}>
-												<NumberInputField
+												<Input
+													type="number"
 													{...field}
 													placeholder="10"
 												/>
@@ -147,25 +155,29 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 											placeholder="Task name"
 										/>
 										<FormErrorMessage>
-											{form.errors.name ||
-												form.errors.hours ||
-												form.errors.minutes}
+											{form.errors.name}
 										</FormErrorMessage>
 									</FormControl>
 								)}
 							</Field>
 
 							<Box mt={4}>
-								<Button variant="outline" onClick={onClose}>
-									Cancel
+								<Button
+									colorScheme="red"
+									onClick={props.onDelete}
+								>
+									Delete
 								</Button>
 								<Button
 									colorScheme="teal"
-									isLoading={props.isSubmitting}
+									isLoading={innerProps.isSubmitting}
 									type="submit"
-									ml={2}
+									mx={2}
 								>
 									Submit
+								</Button>
+								<Button variant="outline" onClick={onClose}>
+									Cancel
 								</Button>
 							</Box>
 						</Form>
