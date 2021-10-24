@@ -1,10 +1,11 @@
 import Auth from "@aws-amplify/auth";
 import Amplify from "@aws-amplify/core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { Heading } from "@chakra-ui/react";
+import { Flex, Heading, Box, Spacer, Center, Text } from "@chakra-ui/react";
 import Container from "@components/container";
 import ContainerInside from "@components/containerInside";
 import MeetingCard from "@components/meeting";
+import Sidepanel from "@components/sidepanel";
 import TaskCard from "@components/task";
 import awsExports from "@utils/aws-exports";
 import { database, Task } from "api/db";
@@ -45,21 +46,28 @@ function Landing(): JSX.Element {
 		return (
 			<Container>
 				<ContainerInside>
-					<Heading>{JSON.stringify(dbDay.day)}</Heading>
+					<Flex minH={600} justifyItems="stretch">
+						<Center>
+							<Box my={5}>
+								<Heading>
+									Welcome back, {user.username}!
+								</Heading>
+								<Text>Here's to another productive day!</Text>
+							</Box>
+						</Center>
+						<Spacer />
+						<Sidepanel />
+					</Flex>
 					<TaskCard
 						task={task}
 						onDelete={() => alert("Deleted!")}
 						editable={false}
-					>
-						Send it
-					</TaskCard>
+					/>
 					<MeetingCard
 						meeting={meeting}
 						onDelete={() => alert("Deleted!?")}
 						editable={true}
-					>
-						Send it!
-					</MeetingCard>
+					/>
 				</ContainerInside>
 			</Container>
 		);

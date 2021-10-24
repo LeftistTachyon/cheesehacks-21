@@ -48,11 +48,11 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 	const inside = (
 		<Center
 			borderRadius="lg"
-			bgColor={props.bgColor ?? "brand.secondary"}
+			bgColor={props.bgColor ?? "brand.tertiary"}
 			_hover={{ cursor: "pointer" }}
 			p={5}
 		>
-			{props.children}
+			<Text>{props.task.name}</Text>
 		</Center>
 	);
 

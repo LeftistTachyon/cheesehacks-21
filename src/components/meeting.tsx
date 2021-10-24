@@ -4,12 +4,10 @@ import {
 	Button,
 	Box,
 	useDisclosure,
-	Text,
-	Flex,
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
-	NumberInput,
+	Text,
 	Input,
 } from "@chakra-ui/react";
 import {
@@ -21,7 +19,7 @@ import {
 import { Field, Form, Formik } from "formik";
 import { Task } from "api/db";
 import React from "react";
-import { DateTime, Duration, Interval } from "luxon";
+import { DateTime } from "luxon";
 
 type MeetingCardProps = {
 	meeting: Task;
@@ -50,11 +48,11 @@ export default function MeetingCard(props: MeetingCardProps): JSX.Element {
 	const inside = (
 		<Center
 			borderRadius="lg"
-			bgColor={props.bgColor ?? "black.20"}
+			bgColor={props.bgColor ?? "lightgray"}
 			_hover={{ cursor: "pointer" }}
 			p={5}
 		>
-			{props.children}
+			<Text>{props.meeting.name}</Text>
 		</Center>
 	);
 

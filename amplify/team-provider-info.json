@@ -1,20 +1,20 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-cheesehacks21-dev-225537-authRole",
-      "UnauthRoleArn": "arn:aws:iam::132589690620:role/amplify-cheesehacks21-dev-225537-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::132589690620:role/amplify-cheesehacks21-dev-225537-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-cheesehacks21-dev-225537-deployment",
-      "UnauthRoleName": "amplify-cheesehacks21-dev-225537-unauthRole",
-      "StackName": "amplify-cheesehacks21-dev-225537",
-      "StackId": "arn:aws:cloudformation:us-east-2:132589690620:stack/amplify-cheesehacks21-dev-225537/40bacb70-347e-11ec-942d-0a348c571e36",
-      "AmplifyAppId": "d63503gywbheu"
-    },
-    "categories": {
-      "auth": {
-        "cheesehacks21db54b5b0": {}
-      }
-    }
-  }
+	"dev": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-cheesehacks21-dev-225537-authRole",
+			"UnauthRoleArn": "arn:aws:iam::132589690620:role/amplify-cheesehacks21-dev-225537-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::132589690620:role/amplify-cheesehacks21-dev-225537-authRole",
+			"Region": "us-east-2",
+			"DeploymentBucketName": "amplify-cheesehacks21-dev-225537-deployment",
+			"UnauthRoleName": "amplify-cheesehacks21-dev-225537-unauthRole",
+			"StackName": "amplify-cheesehacks21-dev-225537",
+			"StackId": "arn:aws:cloudformation:us-east-2:132589690620:stack/amplify-cheesehacks21-dev-225537/40bacb70-347e-11ec-942d-0a348c571e36",
+			"AmplifyAppId": "d63503gywbheu"
+		},
+		"categories": {
+			"auth": {
+				"cheesehacks21db54b5b0": {}
+			}
+		}
+	}
 }

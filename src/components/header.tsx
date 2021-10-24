@@ -25,7 +25,7 @@ export default function Header(): JSX.Element {
 				position="fixed"
 				w="100%"
 				backdropFilter="blur(5px)"
-				bg="#2C922DEE"
+				bg="#0d0d0dee"
 			>
 				<ContainerInside>
 					<Flex
