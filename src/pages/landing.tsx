@@ -4,12 +4,10 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Flex, Heading, Box, Spacer, Center, Text } from "@chakra-ui/react";
 import Container from "@components/container";
 import ContainerInside from "@components/containerInside";
-import MeetingCard from "@components/meeting";
 import Sidepanel from "@components/sidepanel";
-import TaskCard from "@components/task";
 import awsExports from "@utils/aws-exports";
-import { database, Task } from "api/db";
-import { DateTime, Duration } from "luxon";
+import { database } from "api/db";
+import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
 
 Amplify.configure(awsExports);
@@ -31,17 +29,17 @@ function Landing(): JSX.Element {
 		const toDay = DateTime.now().startOf("day");
 		const dbDay = dbUser.getDay(toDay);
 
-		const task: Task = {
-				movable: true,
-				name: "test",
-				duration: Duration.fromObject({ hours: 2 }),
-			},
-			meeting: Task = {
-				movable: false,
-				name: "meeting",
-				startTime: DateTime.fromObject({ hour: 8 }),
-				endTime: DateTime.fromObject({ hour: 9 }),
-			};
+		// const task: Task = {
+		// 		movable: true,
+		// 		name: "test",
+		// 		duration: Duration.fromObject({ hours: 2 }),
+		// 	},
+		// 	meeting: Task = {
+		// 		movable: false,
+		// 		name: "meeting",
+		// 		startTime: DateTime.fromObject({ hour: 8 }),
+		// 		endTime: DateTime.fromObject({ hour: 9 }),
+		// 	};
 
 		return (
 			<Container>
@@ -56,18 +54,12 @@ function Landing(): JSX.Element {
 							</Box>
 						</Center>
 						<Spacer />
-						<Sidepanel />
+						<Sidepanel
+							tasks={dbDay.tasks}
+							editable={false}
+							isToday={true}
+						/>
 					</Flex>
-					<TaskCard
-						task={task}
-						onDelete={() => alert("Deleted!")}
-						editable={false}
-					/>
-					<MeetingCard
-						meeting={meeting}
-						onDelete={() => alert("Deleted!?")}
-						editable={true}
-					/>
 				</ContainerInside>
 			</Container>
 		);
