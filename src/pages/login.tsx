@@ -1,3 +1,4 @@
+import Auth from "@aws-amplify/auth";
 import { Button } from "@chakra-ui/button";
 import {
 	FormControl,
@@ -16,7 +17,6 @@ import {
 import Container from "@components/container";
 import ContainerInside from "@components/containerInside";
 import { Field, Form, Formik } from "formik";
-import { stringify } from "querystring";
 
 export default function Login(): JSX.Element {
 	return (
@@ -137,16 +137,27 @@ function RegisterForm(): JSX.Element {
 		if (!value) {
 			return "Username is required";
 		} else if (!/[A-Za-z0-9]{3,}/g.test(value)) {
-			return "Usernames can only contain only alphanumeric characters and must be at least three characters long";
+			return "Usernames can only contain only alphanumeric characters and must be at least 3 characters long";
+		}
+	}
+	function validateEmail(value: string) {
+		if (!value) {
+			return "Email is required";
 		}
 	}
 	function validateFirstPassword(value: string) {
 		if (!value) {
 			return "Password is required";
-		} else if (value.length < 5) {
-			return "Password must be at least 5 characters long";
-		} else if (!value.match(/[0,9]/g)?.length) {
+		} else if (value.length < 8) {
+			return "Password must be at least 8 characters long";
+		} else if (!value.match(/[A-Z]/g)?.length) {
+			return "Password must have at least one uppercase letter";
+		} else if (!value.match(/[a-z]/g)?.length) {
+			return "Password must have at least one lowercase letter";
+		} else if (!value.match(/[0-9]/g)?.length) {
 			return "Password must have at least one number";
+		} else if (!value.match(/[^A-Za-z0-9]/g)?.length) {
+			return "Password must have at least one special character";
 		}
 	}
 	function validateBothPasswords(first: string, second: string) {
@@ -161,12 +172,29 @@ function RegisterForm(): JSX.Element {
 
 	return (
 		<Formik
-			initialValues={{ newUsername: "", password1: "", password2: "" }}
-			onSubmit={(values, actions) => {
-				setTimeout(() => {
-					alert(JSON.stringify(values, null, 2));
-					actions.setSubmitting(false);
-				}, 1000);
+			initialValues={{
+				newUsername: "",
+				email: "",
+				password1: "",
+				password2: "",
+			}}
+			onSubmit={async (values, actions) => {
+				// setTimeout(() => {
+				// 	alert(JSON.stringify(values, null, 2));
+				// 	actions.setSubmitting(false);
+				// }, 1000);
+				try {
+					const { user } = await Auth.signUp({
+						username: values.newUsername,
+						password: values.password1,
+						attributes: {
+							email: values.email,
+						},
+					});
+					console.log(user);
+				} catch (error) {
+					console.error("Error signing up: ", error);
+				}
 			}}
 		>
 			{(props) => (
@@ -190,6 +218,28 @@ function RegisterForm(): JSX.Element {
 								/>
 								<FormErrorMessage>
 									{form.errors.newUsername}
+								</FormErrorMessage>
+							</FormControl>
+						)}
+					</Field>
+					<Field name="email" validate={validateEmail}>
+						{({ field, form }) => (
+							<FormControl
+								isInvalid={
+									form.errors.email && form.touched.email
+								}
+								isRequired
+								mt={4}
+							>
+								<FormLabel htmlFor="email">Email</FormLabel>
+								<Input
+									{...field}
+									id="email"
+									placeholder="Email"
+									type="email"
+								/>
+								<FormErrorMessage>
+									{form.errors.email}
 								</FormErrorMessage>
 							</FormControl>
 						)}

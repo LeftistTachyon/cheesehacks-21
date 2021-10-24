@@ -1,0 +1,23 @@
+type User @model {
+	id: ID!
+	username: String!
+	days: [Day]
+}
+
+type Day @model {
+	id: ID!
+	day: String!
+	user: User
+	comments: [Task]
+}
+
+type Task @model {
+	id: ID!
+	taskID: ID!
+	name: String!
+	start: String
+	end: String
+	duration: String
+	moveable: Boolean!
+	day: Day
+}

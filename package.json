@@ -5,6 +5,7 @@
 	"license": "AGPL 3.0",
 	"private": true,
 	"dependencies": {
+		"@aws-amplify/ui-react": "^1.2.21",
 		"@babel/core": "^7.15.8",
 		"@chakra-ui/react": "^1.6.10",
 		"@emotion/react": "^11.5.0",
@@ -16,6 +17,7 @@
 		"@types/node": "^16.11.4",
 		"@types/react": "^17.0.31",
 		"@types/react-dom": "^17.0.10",
+		"aws-amplify": "^4.3.3",
 		"formik": "^2.2.9",
 		"framer-motion": "^4.1.17",
 		"next": "^11.1.2",

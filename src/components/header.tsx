@@ -20,12 +20,14 @@ export default function Header(): JSX.Element {
 						alignItems="center"
 					>
 						<>
-							<Heading as="h3" size="md">
-								Planit
-							</Heading>
+							<Link href="/">
+								<Heading as="h3" size="md">
+									Planit
+								</Heading>
+							</Link>
 						</>
 						<Spacer />
-						<Link>Login | Sign Up</Link>
+						<Link href="/login">Login | Sign Up</Link>
 					</Flex>
 				</ContainerInside>
 			</Container>
