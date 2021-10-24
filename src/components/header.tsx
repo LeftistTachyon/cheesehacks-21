@@ -49,7 +49,7 @@ export default function Header(): JSX.Element {
 					</Flex>
 				</ContainerInside>
 			</Container>
-			<Box h={{ base: "80px", md: "56px" }}>{JSON.stringify(user)}</Box>
+			<Box h={{ base: "80px", md: "56px" }}></Box>
 		</>
 	);
 }

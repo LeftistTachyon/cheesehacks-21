@@ -2,8 +2,12 @@ import Auth from "@aws-amplify/auth";
 import Amplify from "@aws-amplify/core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Heading } from "@chakra-ui/react";
+import Container from "@components/container";
+import ContainerInside from "@components/containerInside";
+import TaskCard from "@components/task";
 import awsExports from "@utils/aws-exports";
-import { database } from "api/db";
+import { database, Task } from "api/db";
+import { DateTime, Duration } from "luxon";
 import { useEffect, useState } from "react";
 
 Amplify.configure(awsExports);
@@ -19,10 +23,27 @@ function Landing(): JSX.Element {
 			.catch((_err) => setUser(null));
 	}, []);
 
-	// stateless items
-	const dbUser = database.getUser(user.username);
+	if (user) {
+		// stateless items
+		const dbUser = database.getUser(user.username);
+		const toDay = DateTime.now().startOf("day");
+		const dbDay = dbUser.getDay(toDay);
 
-	return <Heading>{JSON.stringify(user)}</Heading>;
+		const task: Task = {
+			movable: true,
+			name: "test",
+			duration: Duration.fromObject({ hours: 2 }),
+		};
+
+		return (
+			<Container>
+				<ContainerInside>
+					<Heading>{JSON.stringify(dbDay.day)}</Heading>
+					<TaskCard task={task}>Send it</TaskCard>
+				</ContainerInside>
+			</Container>
+		);
+	} else return <></>;
 	// return <></>;
 }
 /*

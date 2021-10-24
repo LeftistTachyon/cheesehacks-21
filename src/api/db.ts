@@ -1,6 +1,6 @@
 import { DateTime, Duration } from "luxon";
 
-class Database {
+export class Database {
 	data: User[];
 	constructor() {
 		this.data = [];
@@ -16,7 +16,7 @@ class Database {
 		return output;
 	}
 }
-class User {
+export class User {
 	username: string;
 	days: Day[];
 	constructor(username: string) {
@@ -33,7 +33,7 @@ class User {
 		return output;
 	}
 }
-class Day {
+export class Day {
 	day: DateTime;
 	tasks: Task[];
 	constructor(day: DateTime) {
@@ -48,7 +48,7 @@ class Day {
 		this.tasks.push(t);
 	}
 }
-type Task = {
+export type Task = {
 	name: string;
 	startTime?: DateTime;
 	endTime?: DateTime;
