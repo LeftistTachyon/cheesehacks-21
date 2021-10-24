@@ -11,7 +11,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 
 export default function LargeWithAppLinksAndSocial() {
 	return (
-		<Box bgColor="brand.secondary" color="brand.tertiary">
+		<Box bgColor="brand.secondary" color="brand.tertiary" as="footer">
 			<Container as={Stack} maxW={"6xl"} py={10}>
 				<SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
 					<Stack align={"flex-start"}>
