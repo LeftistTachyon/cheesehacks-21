@@ -1,8 +1,24 @@
+import Amplify from "@aws-amplify/core";
 import { Box, Flex, Heading, Spacer, Link } from "@chakra-ui/react";
 import Container from "./container";
 import ContainerInside from "./containerInside";
+import awsExports from "@utils/aws-exports";
+import { useEffect, useState } from "react";
+import Auth from "@aws-amplify/auth";
+
+Amplify.configure(awsExports);
 
 export default function Header(): JSX.Element {
+	const [user, setUser] = useState(null);
+	useEffect(() => {
+		Auth.currentUserInfo()
+			.then((user) => {
+				console.log("user: ", user);
+				setUser(user);
+			})
+			.catch((err) => setUser(null));
+	}, []);
+
 	return (
 		<>
 			<Container
@@ -27,11 +43,13 @@ export default function Header(): JSX.Element {
 							</Link>
 						</>
 						<Spacer />
-						<Link href="/login">Login | Sign Up</Link>
+						<Link href="/landing">
+							{user ? "Dashboard" : "Login"}
+						</Link>
 					</Flex>
 				</ContainerInside>
 			</Container>
-			<Box h={{ base: "80px", md: "56px" }}></Box>
+			<Box h={{ base: "80px", md: "56px" }}>{JSON.stringify(user)}</Box>
 		</>
 	);
 }
