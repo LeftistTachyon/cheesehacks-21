@@ -3,6 +3,7 @@ import Amplify from "@aws-amplify/core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Heading } from "@chakra-ui/react";
 import awsExports from "@utils/aws-exports";
+import { database } from "api/db";
 import { useEffect, useState } from "react";
 
 Amplify.configure(awsExports);
@@ -17,6 +18,10 @@ function Landing(): JSX.Element {
 			})
 			.catch((_err) => setUser(null));
 	}, []);
+
+	// stateless items
+	const dbUser = database.getUser(user.username);
+
 	return <Heading>{JSON.stringify(user)}</Heading>;
 	// return <></>;
 }
