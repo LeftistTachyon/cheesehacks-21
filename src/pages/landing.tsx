@@ -44,7 +44,7 @@ function Landing(): JSX.Element {
 		return (
 			<Container>
 				<ContainerInside>
-					<Flex minH={600} justifyItems="stretch">
+					<Flex justifyItems="stretch">
 						<Center>
 							<Box my={5}>
 								<Heading>

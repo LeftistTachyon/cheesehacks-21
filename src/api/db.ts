@@ -38,6 +38,7 @@ export class Day {
 	tasks: Task[];
 	constructor(day: DateTime) {
 		this.day = day;
+		this.tasks = [];
 	}
 	getTask(name: string): Task {
 		for (const t of this.tasks) {

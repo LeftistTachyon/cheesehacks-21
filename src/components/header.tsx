@@ -20,7 +20,7 @@ export default function Header(): JSX.Element {
 	}, []);
 
 	return (
-		<>
+		<Box zIndex={99999}>
 			<Container
 				position="fixed"
 				w="100%"
@@ -50,6 +50,6 @@ export default function Header(): JSX.Element {
 				</ContainerInside>
 			</Container>
 			<Box h={{ base: "80px", md: "56px" }}></Box>
-		</>
+		</Box>
 	);
 }
