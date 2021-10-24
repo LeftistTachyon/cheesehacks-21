@@ -21,10 +21,12 @@ import {
 import { Field, Form, Formik } from "formik";
 import { Task } from "api/db";
 import React from "react";
+import { Duration } from "luxon";
 
 type TaskCardProps = {
 	task: Task;
 	onDelete: () => void;
+	editable: boolean;
 	[key: string]: any;
 };
 
@@ -43,24 +45,25 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 	}
 
 	const duration = props.task.duration;
+	const inside = (
+		<Center
+			borderRadius="lg"
+			bgColor={props.bgColor ?? "brand.secondary"}
+			_hover={{ cursor: "pointer" }}
+			p={5}
+		>
+			{props.children}
+		</Center>
+	);
 
-	return (
+	return props.editable ? (
 		<Popover
 			isOpen={isOpen}
 			onOpen={onOpen}
 			onClose={onClose}
-			closeOnBlur={false}
+			enabled={props.editable}
 		>
-			<PopoverTrigger>
-				<Center
-					borderRadius="lg"
-					bgColor={props.bgColor ?? "brand.secondary"}
-					_hover={{ cursor: "pointer" }}
-					p={5}
-				>
-					{props.children}
-				</Center>
-			</PopoverTrigger>
+			<PopoverTrigger>{inside}</PopoverTrigger>
 			<PopoverContent p={5}>
 				<PopoverArrow />
 				<PopoverCloseButton />
@@ -72,7 +75,16 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 					}}
 					onSubmit={(values, actions) => {
 						setTimeout(() => {
-							alert(JSON.stringify(values, null, 2));
+							props.task.name = values.name;
+							props.task.duration = Duration.fromObject({
+								hours: values.hours,
+								minutes: values.minutes,
+							});
+							if (props.task.startTime) {
+								props.task.endTime = props.task.startTime.plus(
+									props.task.duration
+								);
+							}
 							onClose();
 							actions.setSubmitting(false);
 						}, 1000);
@@ -185,5 +197,7 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 				</Formik>
 			</PopoverContent>
 		</Popover>
+	) : (
+		inside
 	);
 }

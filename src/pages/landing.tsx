@@ -4,6 +4,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Heading } from "@chakra-ui/react";
 import Container from "@components/container";
 import ContainerInside from "@components/containerInside";
+import MeetingCard from "@components/meeting";
 import TaskCard from "@components/task";
 import awsExports from "@utils/aws-exports";
 import { database, Task } from "api/db";
@@ -30,18 +31,35 @@ function Landing(): JSX.Element {
 		const dbDay = dbUser.getDay(toDay);
 
 		const task: Task = {
-			movable: true,
-			name: "test",
-			duration: Duration.fromObject({ hours: 2 }),
-		};
+				movable: true,
+				name: "test",
+				duration: Duration.fromObject({ hours: 2 }),
+			},
+			meeting: Task = {
+				movable: false,
+				name: "meeting",
+				startTime: DateTime.fromObject({ hour: 8 }),
+				endTime: DateTime.fromObject({ hour: 9 }),
+			};
 
 		return (
 			<Container>
 				<ContainerInside>
 					<Heading>{JSON.stringify(dbDay.day)}</Heading>
-					<TaskCard task={task} onDelete={() => alert("Deleted!")}>
+					<TaskCard
+						task={task}
+						onDelete={() => alert("Deleted!")}
+						editable={false}
+					>
 						Send it
 					</TaskCard>
+					<MeetingCard
+						meeting={meeting}
+						onDelete={() => alert("Deleted!?")}
+						editable={true}
+					>
+						Send it!
+					</MeetingCard>
 				</ContainerInside>
 			</Container>
 		);
