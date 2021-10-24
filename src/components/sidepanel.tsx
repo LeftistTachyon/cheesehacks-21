@@ -30,19 +30,30 @@ export default function Sidepanel({
 		);
 	}
 
+	function onDragOver(e) {
+		console.log(e);
+	}
+
 	return (
-		<Flex flexDir="column" my={10} position="relative">
+		<Flex
+			flexDir="column"
+			my={10}
+			position="relative"
+			onDragOver={onDragOver}
+		>
 			{boxes}
 			{tasks.map((task) => {
 				return task.movable ? (
-					<TaskCard
-						task={task}
-						onDelete={() => alert("Deleted!")}
-						editable={editable}
-						width="100%"
-						position="absolute"
-						top={hourHeight(task.startTime)}
-					/>
+					task.startTime ? (
+						<TaskCard
+							task={task}
+							onDelete={() => alert("Deleted!")}
+							editable={editable}
+							width="100%"
+							position="absolute"
+							top={hourHeight(task.startTime)}
+						/>
+					) : null
 				) : (
 					<MeetingCard
 						meeting={task}

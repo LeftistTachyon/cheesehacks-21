@@ -51,6 +51,7 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 			bgColor={props.bgColor ?? "brand.tertiary"}
 			_hover={{ cursor: "pointer" }}
 			p={5}
+			draggable={props.editable}
 		>
 			<Text>{props.task.name}</Text>
 		</Center>

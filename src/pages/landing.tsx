@@ -1,7 +1,16 @@
 import Auth from "@aws-amplify/auth";
 import Amplify from "@aws-amplify/core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { Flex, Heading, Box, Spacer, Center, Text } from "@chakra-ui/react";
+import {
+	Flex,
+	Heading,
+	Box,
+	Spacer,
+	Center,
+	Text,
+	Link,
+	Button,
+} from "@chakra-ui/react";
 import Container from "@components/container";
 import ContainerInside from "@components/containerInside";
 import Sidepanel from "@components/sidepanel";
@@ -50,7 +59,12 @@ function Landing(): JSX.Element {
 								<Heading>
 									Welcome back, {user.username}!
 								</Heading>
-								<Text>Here's to another productive day!</Text>
+								<Text mt={3} mb={7}>
+									Here's to another productive day!
+								</Text>
+								<Link href="/editDay">
+									<Button>Edit my day</Button>
+								</Link>
 							</Box>
 						</Center>
 						<Spacer />
