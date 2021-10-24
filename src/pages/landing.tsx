@@ -15,10 +15,23 @@ function Landing(): JSX.Element {
 				console.log("user: ", user);
 				setUser(user);
 			})
-			.catch((err) => setUser(null));
+			.catch((_err) => setUser(null));
 	}, []);
 	return <Heading>{JSON.stringify(user)}</Heading>;
 	// return <></>;
 }
+/*
+{
+  "id": "us-east-2:1583aa82-860c-4ded-9fcd-f021c79313de",
+  "username": "guiedgui",
+  "attributes": {
+    "sub": "a4a9bc48-33a1-4630-a5a0-400e6c66fd18",
+    "email_verified": true,
+    "phone_number_verified": false,
+    "phone_number": "+12345678910",
+    "email": "email@email.edu"
+  }
+}
+*/
 
 export default withAuthenticator(Landing);

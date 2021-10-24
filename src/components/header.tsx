@@ -16,7 +16,7 @@ export default function Header(): JSX.Element {
 				console.log("user: ", user);
 				setUser(user);
 			})
-			.catch((err) => setUser(null));
+			.catch((_err) => setUser(null));
 	}, []);
 
 	return (
