@@ -11,6 +11,7 @@ export class Database {
 			if (u.username == username) return u;
 		}
 
+		console.log("Creating ", username, "...");
 		const output: User = new User(username);
 		this.data.push(output);
 		return output;
@@ -28,6 +29,7 @@ export class User {
 			if (d.day == day) return d;
 		}
 
+		console.log("Creating ", day, "...");
 		const output: Day = new Day(day);
 		this.days.push(output);
 		return output;
@@ -38,7 +40,20 @@ export class Day {
 	tasks: Task[];
 	constructor(day: DateTime) {
 		this.day = day;
-		this.tasks = [];
+		this.tasks = [
+			{
+				movable: true,
+				name: "test",
+				duration: Duration.fromObject({ hours: 2 }),
+			},
+			{
+				movable: false,
+				name: "meeting",
+				startTime: DateTime.fromObject({ hour: 8 }),
+				endTime: DateTime.fromObject({ hour: 9 }),
+				duration: Duration.fromObject({ hours: 1 }),
+			},
+		];
 	}
 	getTask(name: string): Task {
 		for (const t of this.tasks) {
@@ -53,7 +68,7 @@ export type Task = {
 	name: string;
 	startTime?: DateTime;
 	endTime?: DateTime;
-	duration?: Duration;
+	duration: Duration;
 	movable: boolean;
 };
 

@@ -38,18 +38,6 @@ function Landing(): JSX.Element {
 		const toDay = DateTime.now().startOf("day");
 		const dbDay = dbUser.getDay(toDay);
 
-		// const task: Task = {
-		// 		movable: true,
-		// 		name: "test",
-		// 		duration: Duration.fromObject({ hours: 2 }),
-		// 	},
-		// 	meeting: Task = {
-		// 		movable: false,
-		// 		name: "meeting",
-		// 		startTime: DateTime.fromObject({ hour: 8 }),
-		// 		endTime: DateTime.fromObject({ hour: 9 }),
-		// 	};
-
 		return (
 			<Container>
 				<ContainerInside>

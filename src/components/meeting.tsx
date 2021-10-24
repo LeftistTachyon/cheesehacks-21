@@ -20,6 +20,7 @@ import { Field, Form, Formik } from "formik";
 import { Task } from "api/db";
 import React from "react";
 import { DateTime } from "luxon";
+import { toHeight } from "@utils/config";
 
 type MeetingCardProps = {
 	meeting: Task;
@@ -45,12 +46,15 @@ export default function MeetingCard(props: MeetingCardProps): JSX.Element {
 			return "Please make the start time after the end time.";
 	}
 
+	const { task, onDelete, editable, ...sansObjects } = props;
 	const inside = (
 		<Center
 			borderRadius="lg"
 			bgColor={props.bgColor ?? "lightgray"}
 			_hover={{ cursor: "pointer" }}
 			p={5}
+			h={toHeight(props.meeting.duration)}
+			{...sansObjects}
 		>
 			<Text>{props.meeting.name}</Text>
 		</Center>

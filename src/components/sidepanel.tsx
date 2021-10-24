@@ -34,6 +34,9 @@ export default function Sidepanel({
 		console.log(e);
 	}
 
+	console.log("tasks:");
+	console.log(tasks);
+
 	return (
 		<Flex
 			flexDir="column"
@@ -52,6 +55,7 @@ export default function Sidepanel({
 							width="100%"
 							position="absolute"
 							top={hourHeight(task.startTime)}
+							draggable={editable}
 						/>
 					) : null
 				) : (

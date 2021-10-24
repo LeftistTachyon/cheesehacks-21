@@ -12,7 +12,11 @@ const config = {
 const HOUR_HEIGHT: number = 50;
 
 function hourHeight(dt: DateTime): number {
-	return (timeOnly(dt).as("minutes") / 60) * HOUR_HEIGHT;
+	return toHeight(timeOnly(dt));
+}
+
+function toHeight(d: Duration): number {
+	return (d.as("minutes") / 60) * HOUR_HEIGHT;
 }
 
 function timeOnly(dt: DateTime): Duration {
@@ -20,4 +24,4 @@ function timeOnly(dt: DateTime): Duration {
 }
 
 export default config;
-export { HOUR_HEIGHT, timeOnly, hourHeight };
+export { HOUR_HEIGHT, timeOnly, hourHeight, toHeight };

@@ -22,6 +22,7 @@ import { Field, Form, Formik } from "formik";
 import { Task } from "api/db";
 import React from "react";
 import { Duration } from "luxon";
+import { toHeight } from "@utils/config";
 
 type TaskCardProps = {
 	task: Task;
@@ -45,13 +46,15 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
 	}
 
 	const duration = props.task.duration;
+	const { task, onDelete, editable, ...sansObjects } = props;
 	const inside = (
 		<Center
 			borderRadius="lg"
 			bgColor={props.bgColor ?? "brand.tertiary"}
 			_hover={{ cursor: "pointer" }}
 			p={5}
-			draggable={props.editable}
+			h={toHeight(props.meeting.duration)}
+			{...sansObjects}
 		>
 			<Text>{props.task.name}</Text>
 		</Center>

@@ -11,79 +11,70 @@ import { useState, useEffect } from "react";
 import { DateTime, Duration } from "luxon";
 import TaskCard from "@components/task";
 import { Button } from "@chakra-ui/button";
-import { useForceUpdate } from "@chakra-ui/hooks";
 
 Amplify.configure(awsExports);
 
 function EditDay(): JSX.Element {
-	const [user, setUser] = useState(null);
+	const [tasks, setTasks] = useState([]);
 	useEffect(() => {
 		Auth.currentUserInfo()
 			.then((user) => {
 				console.log("user: ", user);
-				setUser(user);
+				const dbUser = database.getUser(user.username);
+				const toDay = DateTime.now().startOf("day");
+				const dbDay = dbUser.getDay(toDay);
+				setTasks(dbDay.tasks);
 			})
-			.catch((_err) => setUser(null));
+			.catch((_err) => setTasks([]));
 	}, []);
 
-	if (user) {
-		const dbUser = database.getUser(user.username);
-		const toDay = DateTime.now().startOf("day");
-		const dbDay = dbUser.getDay(toDay);
+	function addTask(_e) {
+		tasks.push({
+			movable: true,
+			name: "New Task",
+			duration: Duration.fromObject({ hours: 1 }),
+		});
+		console.log("addTask ", tasks);
+	}
+	function addMeeting(_e) {
+		tasks.push({
+			movable: false,
+			name: "New Meeting",
+			startTime: DateTime.now(),
+			endTime: DateTime.now().plus(Duration.fromObject({ hours: 1 })),
+		});
+		console.log("addMeeting ", tasks);
+	}
 
-		function addTask(_e) {
-			dbDay.addTask({
-				movable: true,
-				name: "New Task",
-				duration: Duration.fromObject({ hours: 1 }),
-			});
-			console.log(dbDay.tasks);
-		}
-		function addMeeting(_e) {
-			dbDay.addTask({
-				movable: false,
-				name: "New Meeting",
-				startTime: DateTime.now(),
-				endTime: DateTime.now().plus(Duration.fromObject({ hours: 1 })),
-			});
-			console.log(dbDay.tasks);
-		}
-
-		return (
-			<Container>
-				<ContainerInside>
-					<Flex justifyItems="stretch">
-						<Box py={30}>
-							<Heading as="h1">Your tasks:</Heading>
-							<Box my={7}>
-								{dbDay.tasks.map((task) => {
-									return task.movable && !task.startTime ? (
-										<TaskCard
-											task={task}
-											onDelete={() => alert("Deleted!")}
-											editable={true}
-										/>
-									) : null;
-								})}
-							</Box>
-							<HStack spacing={5}>
-								<Button onClick={addTask}>Add a task</Button>
-								<Button onClick={addMeeting}>
-									Add a meeting
-								</Button>
-							</HStack>
+	return (
+		<Container>
+			<ContainerInside>
+				<Flex justifyItems="stretch">
+					<Box py={30}>
+						<Heading as="h1">Your tasks:</Heading>
+						<Box my={7}>
+							{tasks.map((task) => {
+								console.log(task);
+								return task.movable && !task.startTime ? (
+									<TaskCard
+										task={task}
+										onDelete={() => alert("Deleted!")}
+										editable={true}
+									/>
+								) : null;
+							})}
 						</Box>
-						<Spacer />
-						<Sidepanel
-							tasks={dbDay.tasks}
-							editable={true}
-							isToday={true}
-						/>
-					</Flex>
-				</ContainerInside>
-			</Container>
-		);
-	} else return <></>;
+						<HStack spacing={5}>
+							<Button onClick={addTask}>Add a task</Button>
+							<Button onClick={addMeeting}>Add a meeting</Button>
+						</HStack>
+					</Box>
+					<Spacer />
+					<Sidepanel tasks={tasks} editable={true} isToday={true} />
+				</Flex>
+			</ContainerInside>
+		</Container>
+	);
 }
 
 export default withAuthenticator(EditDay);
