@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { DateTime, Duration } from "luxon";
 import TaskCard from "@components/task";
 import { Button } from "@chakra-ui/button";
+import { useForceUpdate } from "@chakra-ui/hooks";
 
 Amplify.configure(awsExports);
 

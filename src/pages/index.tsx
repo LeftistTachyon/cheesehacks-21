@@ -7,7 +7,7 @@ import ContainerInside from "@components/containerInside";
 export default function Homepage(): JSX.Element {
 	return (
 		<>
-			<Container bgImage="/forestbackground.png" bgSize="cover">
+			<Container bgImage="/background.png" bgSize="cover">
 				<ContainerInside>
 					<Center p={200} color="brand.primary">
 						<Heading as="h1" size="3xl">
